@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Our Planet's Time</title>
+
+<style>
+.hot {
+  color:white;
+  font-family:"Courier New";
+  }
+.warm {
+  color:rgb(255,127,39);
+  font-family:"Courier New";
+  }
+</style>
+
+<script>
+var foo = setInterval(update, 1000);
+  // executes the function update() once per second
+
+function update() {
+  // gets the time and sets the contents of 2 table cells
+  var Tim = new Date();
+
+  // get numbers ready
+  UTChours = Tim.getUTCHours(); // note spelling
+  if (UTChours == 0) {UTChours = 24}
+  UTCminutes = Tim.getUTCMinutes();
+  UTCseconds = Tim.getUTCSeconds();
+  UTChours < 10 ? UHrsFill = "0" : UHrsFill = "";
+  UTCminutes < 10 ? UMinFill = "0" : UMinFill = "";
+  UTCseconds < 10 ? USecFill = "0" : USecFill = "";
+  TZoffs = -Tim.getTimezoneOffset();
+  TZoffs < 0 ? plusminus = "" : plusminus = "+";
+    // the Time Zone offset will have a - sign for negative
+    // which becomes a Subtract symbol. If not, need
+    // the Add symbol.
+
+  // set the earth image in the clock table cell
+  // rotated to the current position
+  document.getElementById("clock").innerHTML =
+    "<img src=\"earth.gif\""
+    + "style=\"display:block;"
+    + "margin-left:auto; margin-right:auto;"
+    + "transform-origin:50% 50%;"
+    + "transform:rotate(-"
+    + (UTChours*15+UTCminutes/4+UTCseconds/240)
+    + "deg);\">"; 
+    // strings are enclosed in "" marks.
+    // a " inside a string is given by \"
+
+  // put the report in its table cell
+  document.getElementById("timeReport").innerHTML =
+    "UTC (also called Zulu time) is "
+    + "<span class='hot'>"
+    + UHrsFill + UTChours + ":"
+    + UMinFill + UTCminutes + ":"
+    + USecFill + UTCseconds
+    + ".</span>"
+    + "<br><br>Local time (UTC"
+    + plusminus + TZoffs/60 
+    + ":00) is "
+    + "<span class='warm'>"
+    + Tim.toLocaleTimeString()  // function provided
+    + ".</span>"
+    + "<br><br>Both of these times are derived from this computer's clock.";
+  }
+</script>
+</head>
+
+<body style="background-color:black; font-size:2.3vw; color:rgb(200,200,200);">
+
+<table style="width:100%;" border="0">
+<!-- change this border to 1 to see stuff -->
+
+<tr> <!-- 2nd Row: sunlight and Description -->
+<!--left cell: sunlight -->
+<td style="width:429px; color:rgb(255,255,0);"> 
+    <!-- width to match background clock image below -->
+<center>
+<span style="font-size:2.5vw;">
+<!-- down arrows -->
+&darr; &darr; &darr; &darr; &darr; &darr; &darr; Sunlight &darr; &darr; &darr; &darr; &darr; &darr; &darr; &darr;
+</span></center>
+</td> <!-- end left cell: sunlight -->
+
+<!--center cell: description -->
+<td colspan="2" style="vertical-align:bottom;"> 
+<center>
+<span style='font-weight:bold; font-size:2.5vw'>
+Our Planet's Time
+</span>
+<span style='font-weight:bold; font-size:2vw'>
+</span>
+by Woody Brison
+</center>
+</td>
+
+<!-- center cell occupies right cell -->
+</tr><!--end 2nd row-->
+
+<tr><!-- 3rd row: Clock and report -->
+<!--left cell: clock-->
+<td id="clock" rowspan="2" style="height:425px;
+  background-image:url(sky.png); background-repeat:no-repeat;">
+  <!--this gives the hours perimeter and day/night shading-->
+
+<!--earth goes here-->
+
+</td> <!--end left cell: clock-->
+
+<!--middle cell: spacer-->
+<td style="width:50px;">
+</td>
+
+<!--right cell: report-->
+<td id="timeReport" style="vertical-align:center;">
+<!-- report goes here -->
+<center>WAIT FOR IT</center>
+</td> <!--end right cell: report-->
+
+</tr> <!--end 3rd row-->
+
+<tr><!-- 4th row: Clock and report -->
+<!--td joins with above-->
+<td>
+<td>
+<span style="font-size:1.5vw;">
+An animation of the earth from above the North Pole, 
+slowly rotating to match the actual earth.
+It's expanded a little beyond the equator, 
+to be able to see southern continents.
+</span>
+</tr> <!--end 4th row-->
+
+
+</table>
+</body>
+</html>
+
+<!--
+-->
